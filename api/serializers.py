@@ -21,8 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = (
-        'first_name', 'last_name', 'username', 'bio', 'email', 'role')
+        fields = ("first_name", "last_name", "username", "bio", "email", "role")
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -30,7 +29,10 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('name', 'slug',)
+        fields = (
+            "name",
+            "slug",
+        )
 
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -38,7 +40,10 @@ class GenreSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Genre
-        fields = ('name', 'slug',)
+        fields = (
+            "name",
+            "slug",
+        )
 
 
 class TitleSerializerGet(serializers.ModelSerializer):
@@ -50,7 +55,7 @@ class TitleSerializerGet(serializers.ModelSerializer):
 
     class Meta:
         model = Title
-        fields = '__all__'
+        fields = "__all__"
 
 
 class TitleSerializerCreateAndUpdate(serializers.ModelSerializer):
@@ -59,54 +64,58 @@ class TitleSerializerCreateAndUpdate(serializers.ModelSerializer):
     """
 
     category = serializers.SlugRelatedField(
-        slug_field='slug',
-        queryset=Category.objects.all()
+        slug_field="slug", queryset=Category.objects.all()
     )
     genre = serializers.SlugRelatedField(
-        queryset=Genre.objects.all(),
-        slug_field='slug',
-        many=True
+        queryset=Genre.objects.all(), slug_field="slug", many=True
     )
 
     class Meta:
         model = Title
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ReviewSerializer(serializers.ModelSerializer):
     """Класс для преобразования данных отзыва."""
 
     author = serializers.SlugRelatedField(
-        read_only=True,
-        slug_field='username',
-        many=False
+        read_only=True, slug_field="username", many=False
     )
 
     def validate(self, attrs):
-        author = self.context['request'].user.id,
-        title = self.context['view'].kwargs.get('title_id')
-        message = 'Author review already exist'
-        if not self.instance and Review.objects.filter(
-                title=title,
-                author=author
-        ).exists():
+        author = (self.context["request"].user.id,)
+        title = self.context["view"].kwargs.get("title_id")
+        message = "Author review already exist"
+        if (
+            not self.instance
+            and Review.objects.filter(title=title, author=author).exists()
+        ):
             raise serializers.ValidationError(message)
         return attrs
 
     class Meta:
         model = Review
-        fields = ('id', 'text', 'author', 'score', 'pub_date',)
+        fields = (
+            "id",
+            "text",
+            "author",
+            "score",
+            "pub_date",
+        )
 
 
 class CommentSerializer(serializers.ModelSerializer):
     """Класс для преобразования данных комментария."""
 
     author = serializers.SlugRelatedField(
-        read_only=True,
-        slug_field='username',
-        many=False
+        read_only=True, slug_field="username", many=False
     )
 
     class Meta:
-        fields = ('id', 'text', 'author', 'pub_date',)
+        fields = (
+            "id",
+            "text",
+            "author",
+            "pub_date",
+        )
         model = Comment

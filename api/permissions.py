@@ -23,16 +23,16 @@ class AdminPermission(BasePermission):
     def has_permission(self, request, view):
         if request.user.is_authenticated:
             return (
-                request.user.role == UserRole.ADMIN or
-                request.user.is_staff or
-                request.user.is_superuser
+                request.user.role == UserRole.ADMIN
+                or request.user.is_staff
+                or request.user.is_superuser
             )
 
     def has_object_permission(self, request, view, obj):
         return request.method in SAFE_METHODS or (
-                    request.user.role == UserRole.ADMIN or
-                    request.user.is_staff or
-                    request.user.is_superuser
+            request.user.role == UserRole.ADMIN
+            or request.user.is_staff
+            or request.user.is_superuser
         )
 
 
@@ -45,5 +45,5 @@ class ModeratorPermission(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return request.method in SAFE_METHODS or (
-                request.user.role == UserRole.MODERATOR
+            request.user.role == UserRole.MODERATOR
         )

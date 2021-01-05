@@ -1,4 +1,4 @@
-name: yamdb_final workflow
+name: yamdb_workflow
 
 on: [push]
 
@@ -18,9 +18,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         pip install -r requirements.txt
-
     - name: Test with pytest
       run: pytest
+    - name: Test flake8
+      run: flake8 api/
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
