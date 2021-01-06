@@ -54,9 +54,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo docker pull mamontovdn/yamdb-final:latest
-            sudo docker stop $(sudo docker ps -a -q)
-            sudo docker run  mamontovdn/yamdb-final:latest
+            sudo docker-compose up --build
 
   send_message:
     runs-on: ubuntu-latest
