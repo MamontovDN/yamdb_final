@@ -53,8 +53,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          source: "docker-compose.yaml,default.conf"
-          target: "/home/mamontovdn"
+          source: "/docker-compose.yaml,/default.conf,/fixtures.json"
+          target: "/home/mamontovdn/"
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
