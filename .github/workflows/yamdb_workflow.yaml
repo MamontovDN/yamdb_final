@@ -47,15 +47,14 @@ jobs:
     needs: build_and_push_to_docker_hub
     steps:
       - name: copy compose file and nginx settings
-        uses: garygrossgarten/github-action-scp@release
+        uses: appleboy/ssh-action@master
         with:
-          local: docker-compose.yaml
-          remote: /home/mamontovdn/
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-
+          source: "test.txt"
+          target: "test/q/"
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
