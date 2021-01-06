@@ -53,8 +53,9 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          source: "test.txt"
-          target: "test/q/"
+          port: 22
+          source: "docker-compose.yaml"
+          target: "1/"
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
