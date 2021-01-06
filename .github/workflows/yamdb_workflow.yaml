@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
-      - name: executing remote ssh commands to deploy
+      - name: copy compose file and nginx settings
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -54,7 +54,14 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "docker-compose.yaml,default.conf"
-          target: "/home/mamontovdn/"
+          target: "/home/mamontovdn"
+      - name: executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             sudo docker stop $(sudo docker ps -a -q)
             sudo docker-compose up --build
