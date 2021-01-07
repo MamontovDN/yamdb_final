@@ -5,7 +5,8 @@ from django.db.models import Avg
 from django.shortcuts import get_object_or_404
 
 from django_filters import rest_framework
-from rest_framework import filters, mixins, permissions, status, views, viewsets
+from rest_framework import (filters, mixins, permissions,
+                            status, views, viewsets)
 from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -97,7 +98,8 @@ class UserViewSet(viewsets.ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
 class CategoryAndGenreMixin(
@@ -176,7 +178,9 @@ class CommentViewSet(viewsets.ModelViewSet):
         queryset = Comment.objects.all()
         review = get_object_or_404(Review, pk=self.kwargs["review_id"])
         if review is not None:
-            queryset = Comment.objects.filter(review=self.kwargs.get("review_id"))
+            queryset = Comment.objects.filter(
+                review=self.kwargs.get("review_id")
+            )
         return queryset
 
     def perform_create(self, serializer):

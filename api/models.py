@@ -110,7 +110,8 @@ class Review(models.Model):
 
     text = models.TextField(max_length=5000, blank=False, verbose_name="Текст")
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="reviews", verbose_name="Автор"
+        User, on_delete=models.CASCADE, related_name="reviews",
+        verbose_name="Автор"
     )
     score = models.IntegerField(
         default=1,
@@ -146,7 +147,8 @@ class Comment(models.Model):
 
     text = models.TextField(max_length=500, verbose_name="Текст")
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="comments", verbose_name="Автор"
+        User, on_delete=models.CASCADE, related_name="comments",
+        verbose_name="Автор"
     )
     pub_date = models.DateTimeField(
         auto_now_add=True, db_index=True, verbose_name="Дата публикации"

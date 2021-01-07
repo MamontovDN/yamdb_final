@@ -6,7 +6,8 @@ from api.models import Category, Comment, Genre, Review, Title, User
 class UserAdmin(admin.ModelAdmin):
     """Класс для отображения полей пользователя в админке."""
 
-    list_display = ("pk", "first_name", "last_name", "username", "bio", "email", "role")
+    list_display = ("pk", "first_name", "last_name", "username", "bio",
+                    "email", "role")
     search_fields = ("bio",)
     empty_value_display = "-пусто-"
 
