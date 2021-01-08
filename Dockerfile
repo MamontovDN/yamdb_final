@@ -4,7 +4,4 @@ COPY requirements.txt /code
 RUN pip install -r requirements.txt
 COPY . /code
 COPY ./entrypoint.sh /entrypoint.sh
-RUN sed -i 's/\r//' /entrypoint.sh && chmod +x /entrypoint.sh && \
-    chown root /entrypoint.sh
 CMD gunicorn api_yamdb.wsgi:application --bind 0.0.0.0:8000
-ENTRYPOINT ["/entrypoint.sh"]
