@@ -30,15 +30,10 @@ docker container ls
 ```
 В ответ получаем примерно следующее
 ```
-CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS                    
-ab8cb8741e4a   nginx:1.19.0              "/docker-entrypoint.…"   7 minutes ago   Up 2 minutes   0.0.0.0:80->80/tcp       
-f78cc8f246fb   mamontovdn/yamdb:latest   "/bin/sh -c 'gunicor…"   7 minutes ago   Up 2 minutes   0.0.0.0:8000->8000/tcp   
-a68243a0a5e2   postgres:12.4             "docker-entrypoint.s…"   7 minutes ago   Up 2 minutes   5432/tcp                 
-
-NAMES
-mamontovdn_nginx_1
-mamontovdn_web_1
-mamontovdn_db_1
+CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS                    NAMES
+ab8cb8741e4a   nginx:1.19.0              "/docker-entrypoint.…"   7 minutes ago   Up 2 minutes   0.0.0.0:80->80/tcp       mamontovdn_nginx_1
+f78cc8f246fb   mamontovdn/yamdb:latest   "/bin/sh -c 'gunicor…"   7 minutes ago   Up 2 minutes   0.0.0.0:8000->8000/tcp   mamontovdn_web_1
+a68243a0a5e2   postgres:12.4             "docker-entrypoint.s…"   7 minutes ago   Up 2 minutes   5432/tcp                 mamontovdn_db_1
 ```
 Нас интересует контейнер mamontovdn_web_1, заходим в него командой
 ```
