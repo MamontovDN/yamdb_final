@@ -55,4 +55,3 @@ python manage.py loaddata fixtures.json
 ## Автор
 
 * **Дмитрий Мамонтов** - https://github.com/MamontovDN
-
