@@ -1,5 +1,9 @@
 # yamdb_final
 ![yamdb_workflow](https://github.com/mamontovdn/yamdb_final/workflows/yamdb_workflow/badge.svg)
+### Адрес сайта
+http://84.201.129.36/redoc/
+### Пример запроса
+http://84.201.129.36/api/v1/titles/
 ## Описание
 Сайт является - базой отзывов о фильмах, книгах и музыке.
 Пользователи могут оставлять рецензии на произведения, а также комментировать эти рецензии.
